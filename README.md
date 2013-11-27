@@ -1,6 +1,6 @@
 Box View API
 ============
-** Unofficial PHP SDK for the [Box View API](https://developers.box.com/view).**
+**Unofficial PHP SDK for the [Box View API](https://developers.box.com/view).**
 
 
 *Created by [Daniel Pepin](http://danieljpepin.com) @ 
