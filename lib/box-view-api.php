@@ -109,6 +109,7 @@ class Box_View_API {
     if ($result->headers->code !== 200) {
       throw new Box_View_Exception('Error getting content.', $result->headers->code);
     }
+    $doc->content->{$ext} = $result->response;
     return $result;
   }
 
