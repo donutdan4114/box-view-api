@@ -312,9 +312,9 @@ class Box_View_API {
    *  Returns array of responses received from deleting.
    * @throws Box_View_Exception
    */
-  public function deleteMultiple(array $docs = array()) {
+  public function deleteMultiple(array &$docs = array()) {
     $responses = array();
-    foreach ($docs as $doc) {
+    foreach ($docs as &$doc) {
       if ($doc instanceof Box_View_Document) {
         $responses[] = $this->delete($doc);
       }
@@ -360,9 +360,9 @@ class Box_View_API {
    *  Returns array of responses received from uploading.
    * @throws Box_View_Exception
    */
-  public function uploadMultiple(array $docs = array()) {
+  public function uploadMultiple(array &$docs = array()) {
     $responses = array();
-    foreach ($docs as $doc) {
+    foreach ($docs as &$doc) {
       if ($doc instanceof Box_View_Document) {
         $responses[] = $this->upload($doc);
       }
