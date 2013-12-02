@@ -209,7 +209,7 @@ class Box_View_API {
     // Close and return the curl response.
     $result = $this->parseResponse($ch, $response);
     curl_close($ch);
-    if ($result->response->type === 'error') {
+    if (is_object($result->response) && $result->response->type === 'error') {
       throw new Box_View_Exception('Error: ' . $result->response->message, $result->headers->code);
     }
     return $result;
