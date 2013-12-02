@@ -302,6 +302,29 @@ class Box_View_API {
     }
   }
 
+
+  /**
+   * Deletes multiple documents at once.
+   *
+   * @param array $docs
+   *  Array of Box_View_Document instances.
+   * @return array
+   *  Returns array of responses received from deleting.
+   * @throws Box_View_Exception
+   */
+  public function deleteMultiple(array $docs = array()) {
+    $responses = array();
+    foreach ($docs as $doc) {
+      if ($doc instanceof Box_View_Document) {
+        $responses[] = $this->delete($doc);
+      }
+      else {
+        throw new Box_View_Exception('Each document must be of type Box_View_Document.');
+      }
+    }
+    return $responses;
+  }
+
   /**
    * Removes a document completely from the View API servers.
    * This action cannot be undone.
@@ -326,6 +349,28 @@ class Box_View_API {
     // Doc has been deleted set to empty Box_View_Document.
     $doc = new Box_View_Document();
     return $result->response;
+  }
+
+  /**
+   * Uploads multiple documents at once.
+   *
+   * @param array $docs
+   *  Array of Box_View_Document instances.
+   * @return array
+   *  Returns array of responses received from uploading.
+   * @throws Box_View_Exception
+   */
+  public function uploadMultiple(array $docs = array()) {
+    $responses = array();
+    foreach ($docs as $doc) {
+      if ($doc instanceof Box_View_Document) {
+        $responses[] = $this->upload($doc);
+      }
+      else {
+        throw new Box_View_Exception('Each document must be of type Box_View_Document.');
+      }
+    }
+    return $responses;
   }
 
   /**

@@ -1,5 +1,5 @@
-Box View API
-============
+Box View PHP SDK
+================
 **Unofficial PHP SDK for the [Box View API](https://developers.box.com/view).**
 
 
@@ -13,7 +13,9 @@ Documentation
 -------------
 For general API documentaion, please review the [Box View API Documentation](https://developers.box.com/view).
 
-Including the required classes:
+
+To get started,
+Include the required classes:
 ```
 require 'lib/box-view-api.php';
 require 'lib/box-view-document.php';
@@ -35,6 +37,24 @@ $doc->file_url = 'http://my-public-url';
 Uploading a document to the API:
 ```
 $box->upload($doc);
+```
+
+Uploading an array of documents to the API:
+```
+// Create array of Box_View_Document objects.
+$docs[] = new Box_View_Document(array('file_url' => 'http://foo.bar/cat1.png'));
+$docs[] = new Box_View_Document(array('file_url' => 'http://foo.bar/cat2.png'));
+$docs[] = new Box_View_Document(array('file_url' => 'http://foo.bar/cat3.png'));
+
+// Wrap API calls in try/catch.
+try
+{
+  $box->uploadMultiple($docs);
+}
+catch(Exception $e)
+{
+  log('error', $e->getMessage());
+}
 ```
 
 After some time, the document will be processed and can be viewed:
