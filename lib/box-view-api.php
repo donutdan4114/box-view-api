@@ -94,23 +94,38 @@ class Box_View_API {
    *
    * @param Box_View_Document $doc
    * @param string $ext
-   *  Extension of the content to retrieve.
+   *  Extension of the content to retrieve. Valid extensions are 'zip' and 'pdf'.
+   *  If no extension is specified, the original document will be retrieved.
    *
    * @return object
    *
    * @throws Box_View_Exception
    */
-  public function getContent(Box_View_Document &$doc, $ext = 'pdf') {
+  public function getContent(Box_View_Document &$doc, $ext = '') {
     if (empty($doc->id)) {
       throw new Box_View_Exception('Missing required field: id');
     }
-    $curl_params[CURLOPT_URL] = $this->api_url . '/' . $doc->id . '/content.' . $ext;
+    // Add a period to the ext if we are using one.
+    $ext = !empty($ext) ? '.' . $ext : '';
+    $curl_params[CURLOPT_URL] = $this->api_url . '/' . $doc->id . '/content' . $ext;
     $result = $this->httpRequest($curl_params);
     if ($result->headers->code !== 200) {
       throw new Box_View_Exception('Error getting content.', $result->headers->code);
     }
+    $ext = $ext ? : 'original';
     $doc->content->{$ext} = $result->response;
     return $result;
+  }
+
+  /**
+   * Gets the original document.
+   *
+   * @param Box_View_Document $doc
+   * @return mixed
+   *  Returns the document.
+   */
+  public function getOriginal(Box_View_Document &$doc) {
+    return $this->getContent($doc)->response;
   }
 
   /**
