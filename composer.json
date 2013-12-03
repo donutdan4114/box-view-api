@@ -1,0 +1,7 @@
+{
+	"name": "donutdan4114/box-view-api",
+	"require": {
+		"php": ">=5.3",
+		"lib-curl": "*"
+	}
+}
