@@ -395,7 +395,10 @@ class Box_View_API {
 
     if (!empty($doc->file_url)) {
       // We are doing a URL Upload.
-      $post_fields = $this->formatData(array('name' => $doc->name, 'url' => $doc->file_url));
+      $post_fields = $this->formatData(array(
+        'name' => $doc->name ? : basename($doc->file_url),
+        'url' => $doc->file_url,
+      ));
       $curl_params[CURLOPT_URL] = $this->api_url;
       $curl_params[CURLOPT_HTTPHEADER][] = 'Content-Type: application/json';
     }
@@ -405,6 +408,7 @@ class Box_View_API {
       $curl_params[CURLOPT_URL] = $this->api_upload_url;
       $curl_params[CURLOPT_HTTPHEADER][] = 'Content-Type: multipart/form-data';
       $post_fields['file'] = '@' . $doc->file_path;
+      $post_fields['name'] = $doc->name ? : basename($doc->file_path);
     }
 
     $curl_params[CURLOPT_POSTFIELDS] = $post_fields;
