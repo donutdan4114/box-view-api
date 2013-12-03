@@ -42,9 +42,9 @@ $box->upload($doc);
 Uploading an array of documents to the API:
 ```php
 // Create array of Box_View_Document objects.
-$docs[] = new Box_View_Document(array('file_url' => 'http://foo.bar/cat1.png'));
-$docs[] = new Box_View_Document(array('file_url' => 'http://foo.bar/cat2.png'));
-$docs[] = new Box_View_Document(array('file_url' => 'http://foo.bar/cat3.png'));
+$docs[] = new Box_View_Document(array('file_url' => 'http://foo.bar/why-cats-purrrr.pdf'));
+$docs[] = new Box_View_Document(array('file_url' => 'http://foo.bar/10-ways-to-love-your-cat.docx'));
+$docs[] = new Box_View_Document(array('file_url' => 'http://foo.bar/funny-cat-links.xlsx'));
 
 // Wrap API calls in try/catch.
 try
