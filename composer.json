@@ -15,5 +15,8 @@
 	"require": {
 		"php": ">=5.3",
 		"lib-curl": "*"
-	}
+	},
+	"autoload": {
+        	"classmap": ["lib/"]
+        }
 }
