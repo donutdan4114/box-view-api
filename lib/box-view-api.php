@@ -22,7 +22,6 @@ class Box_View_API {
   private $api_url;
   private $api_session_url;
   private $api_upload_url;
-  private $api_view_url;
 
   /**
    * Initializes the Box_View_API object.
@@ -47,7 +46,6 @@ class Box_View_API {
     $this->api_upload_url = self::API_PROTOCOL . '://upload.' . self::API_URL . '/' . self::API_VERSION . '/' . self::API_OBJ;
     // Sessions use a separate URL.
     $this->api_session_url = self::API_PROTOCOL . '://' . self::API_URL . '/' . self::API_VERSION . '/sessions';
-    $this->api_view_url = self::API_PROTOCOL . '://' . self::API_URL . '/view';
     return $this;
   }
 
@@ -79,7 +77,7 @@ class Box_View_API {
       throw new Box_View_Exception('Could not create session.', $result->headers->code);
     }
     $doc->session = $result->response;
-    $doc->session->url = $this->api_view_url . '/' . $doc->session->id;
+    $doc->session->url = $this->api_session_url . '/' . $doc->session->id . '/view';
     return $result->response;
   }
 
