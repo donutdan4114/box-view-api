@@ -68,6 +68,12 @@ Embed the document in an iframe.
 <iframe src="<?= $doc->session->url ?>"></iframe>
 ```
 
+Retrieve a thumbnail image of the first page of a document. Thumbnails can have a width between 16 and 1024 pixels and a height between 16 and 768 pixels.
+```php
+$img = $box->getThumbnail($doc, $width, $height);
+<img src="data:image/png;base64,<?= base64_encode($img) ?>"/>
+```
+
 Showing a PDF version of the file.
 ```php
 $box->getPDF($doc);
