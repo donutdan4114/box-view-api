@@ -32,6 +32,8 @@ Creating a document to upload:
 $doc = new Box_View_Document();
 $doc->name = 'My Awesome Document';
 $doc->file_url = 'http://my-public-url';
+$doc->thumbnails = '128×128,256×256'; // Comma-separated list of thumbnail dimensions of the format {width}x{height} e.g. 128×128,256×256
+$doc->non_svg = false; // boolean (default=false)
 ```
 
 Uploading a document to the API:
