@@ -32,6 +32,8 @@ Creating a document to upload:
 $doc = new Box_View_Document();
 $doc->name = 'My Awesome Document';
 $doc->file_url = 'http://my-public-url';
+$doc->thumbnails = '128×128,256×256'; // Comma-separated list of thumbnail dimensions of the format {width}x{height} e.g. 128×128,256×256
+$doc->non_svg = false; // boolean (default=false)
 ```
 
 Uploading a document to the API:
@@ -66,6 +68,12 @@ echo $doc->session->url; // Links to the HTML5 document.
 Embed the document in an iframe.
 ```php
 <iframe src="<?= $doc->session->url ?>"></iframe>
+```
+
+Retrieve a thumbnail image of the first page of a document. Thumbnails can have a width between 16 and 1024 pixels and a height between 16 and 768 pixels.
+```php
+$img = $box->getThumbnail($doc, $width, $height);
+<img src="data:image/png;base64,<?= base64_encode($img) ?>"/>
 ```
 
 Showing a PDF version of the file.

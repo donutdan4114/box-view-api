@@ -433,6 +433,8 @@ class Box_View_API {
       $post_fields = $this->formatData(array(
         'name' => $doc->name ? : basename($doc->file_url),
         'url' => $doc->file_url,
+        'thumbnails' => $doc->thumbnails,
+        'non_svg' => $doc->non_svg,
       ));
       $curl_params[CURLOPT_URL] = $this->api_url;
       $curl_params[CURLOPT_HTTPHEADER][] = 'Content-Type: application/json';
@@ -444,6 +446,8 @@ class Box_View_API {
       $curl_params[CURLOPT_HTTPHEADER][] = 'Content-Type: multipart/form-data';
       $post_fields['file'] = '@' . $doc->file_path;
       $post_fields['name'] = $doc->name ? : basename($doc->file_path);
+	  $post_fields['thumbnails'] = $doc->thumbnails; 
+	  $post_fields['non_svg'] = $doc->non_svg; 
     }
 
     $curl_params[CURLOPT_POSTFIELDS] = $post_fields;

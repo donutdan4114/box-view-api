@@ -15,6 +15,8 @@
 class Box_View_Document {
 
   public $name; // The name of this document.
+  public $thumbnails = ''; // Comma-separated list of thumbnail dimensions of the format {width}x{height} e.g. 128×128,256×256
+  public $non_svg = false; // Whether to also create the non-svg version of the document
 
   public $file_url; // URL to the document you want to upload.
   public $file_path; // Internal path to the document you want to upload.
