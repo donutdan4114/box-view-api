@@ -147,6 +147,28 @@ class Box_View_API {
   public function getZip(Box_View_Document &$doc) {
     return $this->getContent($doc, 'zip')->response;
   }
+  
+  /**
+   * Retrieve a thumbnail image of the first page of a document.
+   *
+   * @param Box_View_Document $doc
+   * @param int $width
+   * @param int $height
+   * 
+   * @return mixed
+   *  Returns the raw Png file.
+   */
+  public function getThumbnail(Box_View_Document &$doc, $width = 1024, $height = 768) {
+    if (empty($doc->id)) {
+      throw new Box_View_Exception('Missing required field: id');
+    }
+    $curl_params[CURLOPT_URL] = $this->api_url . '/' . $doc->id . '/thumbnail?width='. $width . '&height=' . $height;
+    $result = $this->httpRequest($curl_params);
+    if ($result->headers->code !== 200) {
+      throw new Box_View_Exception('Error getting content.', $result->headers->code);
+    }
+    return $result->response;
+  }
 
   /**
    * Loads all documents that have been uploaded using this API Key.
