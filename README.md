@@ -41,6 +41,15 @@ Uploading a document to the API:
 $box->upload($doc);
 ```
 
+You can also upload local files through the API:
+```php
+$doc = new Box_View_Document(array(
+  'name' => 'My Local File',
+  'file_path' => '/path/to/file/CV_Template1.doc',
+));
+$box->upload($doc);
+```
+
 Uploading an array of documents to the API:
 ```php
 // Create array of Box_View_Document objects.
