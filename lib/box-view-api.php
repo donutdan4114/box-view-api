@@ -147,14 +147,14 @@ class Box_View_API {
   public function getZip(Box_View_Document &$doc) {
     return $this->getContent($doc, 'zip')->response;
   }
-  
+
   /**
    * Retrieve a thumbnail image of the first page of a document.
    *
    * @param Box_View_Document $doc
    * @param int $width
    * @param int $height
-   * 
+   *
    * @return mixed
    *  Returns the raw Png file.
    */
@@ -244,7 +244,7 @@ class Box_View_API {
     // Close and return the curl response.
     $result = $this->parseResponse($ch, $response);
     curl_close($ch);
-    if (is_object($result->response) && $result->response->type === 'error') {
+    if (is_object($result->response) && property_exists($result->response, 'type') && $result->response->type === 'error') {
       throw new Box_View_Exception('Error: ' . $result->response->message, $result->headers->code);
     }
     return $result;
@@ -446,8 +446,8 @@ class Box_View_API {
       $curl_params[CURLOPT_HTTPHEADER][] = 'Content-Type: multipart/form-data';
       $post_fields['file'] = '@' . $doc->file_path;
       $post_fields['name'] = $doc->name ? : basename($doc->file_path);
-	  $post_fields['thumbnails'] = $doc->thumbnails; 
-	  $post_fields['non_svg'] = $doc->non_svg; 
+    $post_fields['thumbnails'] = $doc->thumbnails;
+    $post_fields['non_svg'] = $doc->non_svg;
     }
 
     $curl_params[CURLOPT_POSTFIELDS] = $post_fields;
