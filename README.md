@@ -1,7 +1,7 @@
 Box View PHP SDK
 ================
-**Unofficial PHP SDK for the [Box View API](https://developers.box.com/view).**
 
+**NOTE:** No longer supported. Check out the official [Box View PHP SDK](https://github.com/crocodoc/php-box-view).  
 
 *Created by [Daniel Pepin](http://danieljpepin.com) @ 
 [CommonPlaces, Inc](http://commonplaces.com)*  
